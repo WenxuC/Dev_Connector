@@ -9,8 +9,8 @@ const { check, validationResult } = require('express-validator');
 
 // Creating a route
 // @route   GET api/auth
-// @desc    Test route
-// @access  Public
+// @desc    Get user by token
+// @access  Private
 router.get('/', auth, async (req, res) => {
 	try {
 		const user = await User.findById(req.user.id).select('-password');
@@ -22,7 +22,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // @route   POST api/users
-// @desc    Register User
+// @desc    Authenticate user & get token
 // @access  Public (no authentication needed)
 router.post(
 	'/',
