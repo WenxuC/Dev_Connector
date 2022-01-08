@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 //import axios from 'axios';
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuthenthicated }) => {
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -50,6 +50,10 @@ const Register = ({ setAlert, register }) => {
 			// }
 		}
 	};
+
+	if (isAuthenthicated) {
+		return <Navigate to='/dashboard' />;
+	}
 	return (
 		<section className='container'>
 			<h1 className='large text-primary'>Sign Up</h1>
@@ -108,5 +112,11 @@ const Register = ({ setAlert, register }) => {
 Register.propTypes = {
 	setAlert: PropTypes.func.isRequired,
 	register: PropTypes.func.isRequired,
+	isAuthenthicated: PropTypes.bool,
 };
-export default connect(null, { setAlert, register })(Register);
+
+const mapStateToProps = state => ({
+	isAuthenthicated: state.auth.isAuthenthicated,
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);
