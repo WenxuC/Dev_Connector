@@ -6,9 +6,7 @@ import { register } from '../../actions/auth';
 
 import PropTypes from 'prop-types';
 
-//import axios from 'axios';
-
-const Register = ({ setAlert, register, isAuthenthicated }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -27,31 +25,10 @@ const Register = ({ setAlert, register, isAuthenthicated }) => {
 			setAlert('Password do not match', 'danger');
 		} else {
 			register({ name, email, password });
-			// console.log('register', register);
-			/* Access the back end*/
-			// const newUser = {
-			// 	name,
-			// 	email,
-			// 	password,
-			// };
-			// try {
-			// 	const config = {
-			// 		headers: {
-			// 			'Content-Type': 'application/json',
-			// 		},
-			// 	};
-
-			// 	const body = JSON.stringify(newUser);
-
-			// 	const res = await axios.post('/api/users', body, config);
-			// 	console.log(res.data);
-			// } catch (err) {
-			// 	console.error(err.response.data);
-			// }
 		}
 	};
 
-	if (isAuthenthicated) {
+	if (isAuthenticated) {
 		return <Navigate to='/dashboard' />;
 	}
 	return (
@@ -112,11 +89,11 @@ const Register = ({ setAlert, register, isAuthenthicated }) => {
 Register.propTypes = {
 	setAlert: PropTypes.func.isRequired,
 	register: PropTypes.func.isRequired,
-	isAuthenthicated: PropTypes.bool,
+	isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-	isAuthenthicated: state.auth.isAuthenthicated,
+	isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { setAlert, register })(Register);
