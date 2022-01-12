@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
@@ -24,17 +24,13 @@ const App = () => {
 	return (
 		<Provider store={store}>
 			<Router>
-				<Fragment>
-					<Navbar />
-					<section className='container'>
-						<Alert />
-						<Routes>
-							<Route path='/' element={<Landing />} />
-							<Route path='/register' element={<Register />} />
-							<Route path='/login' element={<Login />} />
-						</Routes>
-					</section>
-				</Fragment>
+				<Navbar />
+				<Alert />
+				<Routes>
+					<Route path='/' element={<Landing />} />
+					<Route path='/register' element={<Register />} />
+					<Route path='/login' element={<Login />} />
+				</Routes>
 			</Router>
 		</Provider>
 	);
