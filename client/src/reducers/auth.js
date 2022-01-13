@@ -53,3 +53,5 @@ function Auth(state = initialState, action) {
 			return state;
 	}
 }
+
+export default Auth;
