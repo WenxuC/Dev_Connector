@@ -16,7 +16,7 @@ const initialState = {
 };
 
 // Register User
-export default function (state = initialState, action) {
+function Auth(state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
