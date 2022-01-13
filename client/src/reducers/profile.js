@@ -14,7 +14,8 @@ const initialState = {
 	loading: true,
 	error: {},
 };
-function profile(state = initialState, action) {
+
+export default function (state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
@@ -55,5 +56,3 @@ function profile(state = initialState, action) {
 			return state;
 	}
 }
-
-export default profile;
