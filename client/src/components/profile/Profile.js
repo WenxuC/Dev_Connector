@@ -3,14 +3,34 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
 import { getProfileById } from '../../actions/profile';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
-const Profile = ({ getProfileById, profile: { profile }, auth }) => {
+const Profile = ({ getProfileById, profile: { profile, loading }, auth }) => {
 	const { id } = useParams();
 	useEffect(() => {
 		getProfileById(id);
 	}, [getProfileById, id]);
-	return <div>Profile</div>;
+	return (
+		<Fragment>
+			{profile === null || loading ? (
+				<Spinner />
+			) : (
+				<Fragment>
+					<Link to='/profiles' className='btn btn-light'>
+						{' '}
+						Back to profiles
+					</Link>
+					{auth.isAuthenticated &&
+						auth.loading === false &&
+						auth.user._id === profile.user._id && (
+							<Link to='/edit-profile' className='btn btn-dark'>
+								Edit Profile
+							</Link>
+						)}
+				</Fragment>
+			)}
+		</Fragment>
+	);
 };
 
 Profile.propTypes = {
