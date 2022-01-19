@@ -15,7 +15,7 @@ const initialState = {
 	error: {},
 };
 
-export default function (state = initialState, action) {
+export default function profile(state = initialState, action) {
 	const { type, payload } = action;
 
 	switch (type) {
@@ -35,6 +35,7 @@ export default function (state = initialState, action) {
 		case PROFILE_ERROR:
 			return {
 				...state,
+				profile: null,
 				error: payload,
 				loading: false,
 			};
